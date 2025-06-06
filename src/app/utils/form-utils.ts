@@ -2,6 +2,10 @@ import { FormArray, FormGroup, ValidationErrors } from "@angular/forms";
 
 export class FormUtils {
 
+  static namePattern = '([a-zA-Z]+) ([a-zA-Z]+)';
+  static emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+  static notOnlySpacesPattern = '^[a-zA-Z0-9]+$';
+
 static getTextError(errors: ValidationErrors){
     for(const key of Object.keys(errors)){
         switch(key){
@@ -13,6 +17,13 @@ static getTextError(errors: ValidationErrors){
             return `Valor minimo de ${errors['min'].min }`;
         case 'email':
             return `Email no valido ${errors['email'].email }`;
+        case 'pattern':
+            if(errors['pattern'].requiredPattern === FormUtils.emailPattern){
+                return 'El valor agregado no es un mail valido';
+            }
+            return 'Error de patron contra expresion regular';
+        default:
+            return `Error no controlado ${key}`;
         }
     }
     return null;

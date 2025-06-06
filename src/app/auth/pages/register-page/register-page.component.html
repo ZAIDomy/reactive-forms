@@ -17,6 +17,7 @@
                            >
                     @if(formUtils.isValidField(myForm,'name')){
                     <span class="form-text text-danger">
+                        El campo debe tener nombre y apellido, 
                         {{formUtils.getFieldError(myForm,'name')}}
                     </span>
                     }
@@ -35,6 +36,7 @@
                            >
                     @if(formUtils.isValidField(myForm,'email')){
                     <span class="form-text text-danger">
+                        <!-- El valor ingresado no es mail valido,  -->
                         {{formUtils.getFieldError(myForm,'email')}}
                     </span>
                 }
@@ -52,6 +54,7 @@
                            >
                     @if(formUtils.isValidField(myForm,'username')){
                     <span class="form-text text-danger">
+                        El usuario no puede llevar espacios, 
                         {{formUtils.getFieldError(myForm,'username')}}
                     </span>
                     }
