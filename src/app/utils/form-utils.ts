@@ -11,6 +11,8 @@ static getTextError(errors: ValidationErrors){
             return `Minimo de ${errors['minlength'].requiredLength } caracteres`;
         case 'min':
             return `Valor minimo de ${errors['min'].min }`;
+        case 'email':
+            return `Email no valido ${errors['email'].email }`;
         }
     }
     return null;
