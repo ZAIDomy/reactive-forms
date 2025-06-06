@@ -98,6 +98,13 @@
 
             <div class="row">
                 <div class="col">
+
+                    @if(myForm.errors && myForm.touched){
+                        <span class="form-text text-danger">
+                            Las contraseñas no son iguales
+                        </span>
+                    }
+
                     <button class="btn btn-primary float-end"
                             type="submit">
                         Crear
@@ -116,6 +123,7 @@
 <h2>Form Pending: {{ myForm.pending }}</h2>
 
 <h2>Form errors:</h2>
+<pre>{{ myForm.errors | json }}</pre>
 
 <h5>Value</h5>
 <pre>{{ myForm.value | json }}</pre>
