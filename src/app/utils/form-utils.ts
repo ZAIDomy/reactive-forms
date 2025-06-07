@@ -1,5 +1,14 @@
 import { AbstractControl, FormArray, FormGroup, ValidationErrors } from "@angular/forms";
 
+async function sleep() {
+
+  return new Promise( resolve => {
+    setTimeout(()=>{
+      resolve(true)
+    },2500);
+  });
+}
+
 export class FormUtils {
 
   static namePattern = '([a-zA-Z]+) ([a-zA-Z]+)';
@@ -17,6 +26,8 @@ static getTextError(errors: ValidationErrors){
             return `Valor minimo de ${errors['min'].min }`;
         case 'email':
             return `Email no valido ${errors['email'].email }`;
+        case 'emailTaken':
+            return `Email proporcionado ya esta ocupado`;
         case 'pattern':
             if(errors['pattern'].requiredPattern === FormUtils.emailPattern){
                 return 'El valor agregado no es un mail valido';
@@ -55,7 +66,7 @@ static getFieldErrorInArray(formArray: FormArray, index: number): string | null 
 
     const errors = formArray.controls[index].errors ?? {};
 
-    return FormUtils.getTextError(errors);  
+    return FormUtils.getTextError(errors);
 }
 
 static isFieldOneEqualFieldTwo(field1: string, field2: string){
@@ -65,6 +76,21 @@ static isFieldOneEqualFieldTwo(field1: string, field2: string){
 
         return field1Value === field2Value ? null : { passwordsNotEqual: true };
     };
+}
+
+static async checkingServerResponse(control: AbstractControl): Promise<ValidationErrors | null>  {
+
+  await sleep(); // 2 seg y medio
+
+  const formValue = control.value;
+
+  if( formValue === 'hola@mundo.com'){
+    return {
+      emailTaken: true,
+    }
+  }
+
+  return null;
 }
 
 }
