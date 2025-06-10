@@ -9,13 +9,7 @@ export class CountryService {
   private baseUrl = 'https://restcountries.com/v3.1';
   private http = inject(HttpClient);
 
-  private _regions = [
-    'Africa',
-    'Americas',
-    'Asia',
-    'Europa',
-    'Oceania',
-  ];
+  private _regions = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
 
   get regions(): string[]{
     return [...this._regions];
