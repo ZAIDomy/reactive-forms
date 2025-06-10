@@ -28,6 +28,8 @@ static getTextError(errors: ValidationErrors){
             return `Email no valido ${errors['email'].email }`;
         case 'emailTaken':
             return `Email proporcionado ya esta ocupado`;
+        case 'userTaken':
+            return `Usuario proporcionado ya esta tomado`;
         case 'pattern':
             if(errors['pattern'].requiredPattern === FormUtils.emailPattern){
                 return 'El valor agregado no es un mail valido';
@@ -91,6 +93,20 @@ static async checkingServerResponse(control: AbstractControl): Promise<Validatio
   }
 
   return null;
+}
+
+static notUser(control: AbstractControl):ValidationErrors | null{
+
+  const formValue = control.value;
+
+  if( formValue === 'zaidomy'){
+    return {
+      userTaken: true,
+    }
+  }
+
+  return null;
+
 }
 
 }
