@@ -14,7 +14,6 @@ export class CountryService {
     'Americas',
     'Asia',
     'Europa',
-    'Americas',
     'Oceania',
   ];
 
